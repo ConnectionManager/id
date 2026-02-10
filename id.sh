@@ -35,6 +35,8 @@ if [ $? -eq 0 ]; then
     
     echo ""
     echo "Reiniciando serviço Xray..."
+    chmod 644 /usr/local/etc/xray/config.json
+    chown root:root /usr/local/etc/xray/config.json
     systemctl restart xray
     echo "Serviço Xray reiniciado."
 else
