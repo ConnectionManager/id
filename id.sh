@@ -25,7 +25,7 @@ path_input="/$path_number"
 temp_file=$(mktemp)
 
 jq --arg new_path "$path_input" \
-   '.inbounds[] | select(.tag == "inbound-sshorizon").streamSettings.xhttpSettings.path = $new_path' \
+   '(.. | .xhttpSettings? // empty).path = $new_path' \
    "$CONFIG_FILE" > "$temp_file"
 
 if [ $? -eq 0 ]; then
